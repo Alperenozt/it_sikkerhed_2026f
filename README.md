@@ -1,17 +1,30 @@
-# it_sikkerhed_2026f
-# 🧩 Zealand Skoleprojekt
-Mit navn er Alperen - ALO001
-Dette repository indeholder et skoleprojekt udviklet som en del af undervisningen på **Zealand – Sjællands Erhvervsakademi**.
+# 📘 Skoleprojekt – IT-Sikkerhed (2. semester)
 
-Projektet er lavet med fokus på læring, struktur og god programmeringspraksis. Formålet er at demonstrere forståelse for softwareudvikling, dokumentation og versionsstyring.
+**ID:** Al0001  
+**Institution:** Zealand – Sjællands Erhvervsakademi, Næstved
+
+---
+
+### 🛡️ Projektbeskrivelse
+Dette repository indeholder et skoleprojekt udarbejdet som en del af **IT-Sikkerhed-uddannelsen**. Projektet vægter teknisk dokumentation og praktisk implementering af sikkerhedsstandarder.
+
+**Fokusområder:**
+* **Programkvalitet:** Ren og vedligeholdelsesvenlig kodebase.
+* **Software-sikkerhed:** Beskyttelse mod gængse sårbarheder.
+* **Secure Design Principles:** Sikkerhed indtænkt fra første kodelinje.
+
+*Projektet er udviklet i overensstemmelse med læringsmålene i studieordningen.*
+
+---
+
+### 💻 Terminal & Status
 
 ```text
       /\_/\      .-----------------------.
      ( o.o )     |  Coding in progress.. |
       > ^ <      '-----------------------'
 
-
-________________________________________________
+          ________________________________________________
          /                                                \
          |  >_ System.out.println("Hello, Zealand!");      |
          |  >_ Loading learning modules...                 |
@@ -20,7 +33,7 @@ ________________________________________________
                 ||                           ||
                 ||      ________________     ||
                 ||     |                |    ||
-                ||     |      JS/C#     |    ||
+                ||     |      AL0001    |    ||
                 ||     |________________|    ||
                 ||                           ||
          _______||___________________________||_______

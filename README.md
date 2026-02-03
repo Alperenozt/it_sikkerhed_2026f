@@ -1,6 +1,6 @@
 # it_sikkerhed_2026f
 # 🧩 Zealand Skoleprojekt
-
+Mit navn er Alperen - ALO001
 Dette repository indeholder et skoleprojekt udviklet som en del af undervisningen på **Zealand – Sjællands Erhvervsakademi**.
 
 Projektet er lavet med fokus på læring, struktur og god programmeringspraksis. Formålet er at demonstrere forståelse for softwareudvikling, dokumentation og versionsstyring.
@@ -25,5 +25,5 @@ ________________________________________________
                 ||                           ||
          _______||___________________________||_______
         /                                             \
-       /        ZEALAND ERHVERVSAKADEMI - 2024         \
+       /        ZEALAND ERHVERVSAKADEMI - 2026         \
       /_________________________________________________\

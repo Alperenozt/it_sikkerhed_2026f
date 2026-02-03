@@ -1,0 +1,26 @@
+name: Kør pytest automatisk
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Hent kode
+      uses: actions/checkout@v4
+
+    - name: Installer Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Installer afhængigheder
+      run: pip install pytest
+
+    - name: Kør tests
+      run: pytest -v

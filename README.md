@@ -1,6 +1,6 @@
 # 📘 Skoleprojekt – IT-Sikkerhed (2. semester)
 
-**ID:** Al0001  
+**ID:** Alo001  
 **Institution:** Zealand – Sjællands Erhvervsakademi, Næstved
 
 ---

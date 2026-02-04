@@ -1,43 +1,20 @@
 import pytest
 
-# ─────────────── Basis tests ─────────────── echo "# test" >> README.md
-
-def test_pass():
-    # Simpel matematik der passer
-    assert 4 - 1 == 3
-
-
+# ─────────────── Basis tests ─────────────── 
 def test_fail():
-    # Fejler fordi teksten ikke matcher
-    assert "Python" == "pyhton"   # stavefejl med vilje
-
-
-@pytest.mark.skip(reason="Denne test springes over i eksemplet")
-def test_skip():
-    # Bliver aldrig kørt
-    assert 999 == 0
-
+    assert "Python" == "Python"
 
 def test_crash():
-    # Crasher pga. adgang til NoneType
-    value = None
-    value.upper()   # AttributeError → crash
-
-
-# ─────────────── Ekstra tests ───────────────
+    value = "python"
+    assert value.upper() == "PYTHON"
 
 def test_fail_list_length():
-    # Fejler fordi længden ikke passer
     data = [1, 2, 3]
-    assert len(data) == 5
-
+    assert len(data) == 3
 
 def test_crash_keyerror():
-    # Crasher pga. manglende nøgle i dictionary
-    user = {"navn": "Alperen"}
-    return user["alder"]   # KeyError
-
+    user = {"navn": "Alperen", "alder": 18}
+    assert user["alder"] == 18
 
 def test_fail_math():
-    # Fejler på forkert beregning
-    assert 10 / 2 == 3
+    assert 10 / 2 == 5

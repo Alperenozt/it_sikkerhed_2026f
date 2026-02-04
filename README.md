@@ -15,6 +15,8 @@ Dette repository indeholder et skoleprojekt udarbejdet som en del af **IT-Sikker
 
 *Projektet er udviklet i overensstemmelse med læringsmålene i studieordningen.*
 
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/f472f8b44438062d3497f3799dd4794e812cc521/unittest1.png)
+
 ---
 
 ### 💻 Terminal & Status

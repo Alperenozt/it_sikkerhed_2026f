@@ -1,6 +1,6 @@
 import pytest
 
-# ─────────────── Basis tests ───────────────
+# ─────────────── Basis tests ─────────────── echo "# test" >> README.md
 
 def test_pass():
     # Simpel matematik der passer

@@ -41,5 +41,5 @@ Dette repository indeholder et skoleprojekt udarbejdet som en del af **IT-Sikker
        /        ZEALAND ERHVERVSAKADEMI - 2026         \
       /_________________________________________________\
 UNIT TEST - LEG OPGAVE
-![alt text](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/238bc405068b6df825e538dce8b208ea3168c78f/unittest1.png)
+![image alt](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/238bc405068b6df825e538dce8b208ea3168c78f/unittest1.png)
 

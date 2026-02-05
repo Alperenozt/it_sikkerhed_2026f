@@ -39,6 +39,55 @@ Ny branch for test - alt rettet
 
 ![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/e1c9788759eeafa1897eeb48c9aa0c959f3d093d/Ny%20branch%20test%20-%20alt%20rettet%20.png)
 
+<table>
+  <thead>
+    <tr>
+      <th>Testteknik</th>
+      <th>Hvad den tester</th>
+      <th>Eksempel fra min kode</th>
+      <th>Security Gate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ækvivalensklasser</td>
+      <td>Gyldigt/ugyldigt login-input</td>
+      <td>"ab" → False, "abc" → True, "a"*21 → False</td>
+      <td>Input Validation Gate</td>
+    </tr>
+    <tr>
+      <td>Grænseværdi test</td>
+      <td>Minimum/maximum værdier for password</td>
+      <td>7 tegn → False, 8 tegn → True</td>
+      <td>Static Analysis Gate</td>
+    </tr>
+    <tr>
+      <td>CRUD(L)</td>
+      <td>Brugerhåndtering</td>
+      <td>Create, Read, Update, Delete af bruger</td>
+      <td>Development Gate</td>
+    </tr>
+    <tr>
+      <td>Cycle process test</td>
+      <td>Login-livscyklus inkl. låsning</td>
+      <td>3 forkerte forsøg → låst konto</td>
+      <td>Integration Test Gate</td>
+    </tr>
+    <tr>
+      <td>Decision table test</td>
+      <td>Login-beslutninger</td>
+      <td>Korrekt/ukorrekt kode + låst/ikke låst</td>
+      <td>Security Review Gate</td>
+    </tr>
+    <tr>
+      <td>Testpyramiden</td>
+      <td>Unit test af login</td>
+      <td>Login med korrekt password → "ok"</td>
+      <td>Test Strategy Gate</td>
+    </tr>
+  </tbody>
+</table>
+
 ---
 
 ### 💻 Terminal & Status

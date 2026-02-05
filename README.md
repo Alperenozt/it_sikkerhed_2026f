@@ -128,6 +128,23 @@ Inden koden kan godkendes, skal den passere:
 
 Alle tests er verificeret d. 05-02-2026. Brug følgende kommando for at eksekvere test: pytest -v eller -vv
 
+## 📊 Data-dreven test (Decision Table + Grænseværdi)
+
+Denne test kombinerer en **beslutningstabel** med **grænseværdianalyse** for password-længde. Ved at bruge en data-dreven tilgang via `pytest.mark.parametrize`, adskiller vi testdata fra selve testlogikken. Dette gør det meget lettere at læse, vedligeholde og udvide med nye scenarier.
+
+### Testmatrix
+Tabellen herunder viser, hvordan systemet skal reagere på forskellige kombinationer af input og konto-status:
+
+| Password (Input) | Matcher DB? | Konto låst? | Forventet resultat | Beskrivelse |
+| :--- | :---: | :---: | :--- | :--- |
+| `1234567` | Nej | Nej | **forkert** | Fejler pga. grænseværdi (for kort) |
+| `12345678` | Ja | Nej | **ok** | Præcis på grænsen og korrekt match |
+| `12345678` | Ja | Ja | **låst** | Korrekt match, men kontoen er spærret |
+| `forkertpw` | Nej | Ja | **låst** | Forkert input på en allerede låst konto |
+
+**Testfil:** `test_login_datadreven.py`  
+**Teknik:** Parametrisering sikrer, at vi tester alle logiske kombinationer (Edge Cases) i en samlet funktion.
+
 ```bash
 # Kør alle tests med detaljeret output
 pytest -v test_aekvivalensklasser.py test_graensevaerdi.py test_crud.py test_cycle_process.py test_decision_table.py

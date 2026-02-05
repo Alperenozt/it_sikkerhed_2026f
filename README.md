@@ -39,54 +39,125 @@ Ny branch for test - alt rettet
 
 ![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/e1c9788759eeafa1897eeb48c9aa0c959f3d093d/Ny%20branch%20test%20-%20alt%20rettet%20.png)
 
-<table>
-  <thead>
-    <tr>
-      <th>Testteknik</th>
-      <th>Hvad den tester</th>
-      <th>Eksempel fra min kode</th>
-      <th>Security Gate</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Ækvivalensklasser</td>
-      <td>Gyldigt/ugyldigt login-input</td>
-      <td>"ab" → False, "abc" → True, "a"*21 → False</td>
-      <td>Input Validation Gate</td>
-    </tr>
-    <tr>
-      <td>Grænseværdi test</td>
-      <td>Minimum/maximum værdier for password</td>
-      <td>7 tegn → False, 8 tegn → True</td>
-      <td>Static Analysis Gate</td>
-    </tr>
-    <tr>
-      <td>CRUD(L)</td>
-      <td>Brugerhåndtering</td>
-      <td>Create, Read, Update, Delete af bruger</td>
-      <td>Development Gate</td>
-    </tr>
-    <tr>
-      <td>Cycle process test</td>
-      <td>Login-livscyklus inkl. låsning</td>
-      <td>3 forkerte forsøg → låst konto</td>
-      <td>Integration Test Gate</td>
-    </tr>
-    <tr>
-      <td>Decision table test</td>
-      <td>Login-beslutninger</td>
-      <td>Korrekt/ukorrekt kode + låst/ikke låst</td>
-      <td>Security Review Gate</td>
-    </tr>
-    <tr>
-      <td>Testpyramiden</td>
-      <td>Unit test af login</td>
-      <td>Login med korrekt password → "ok"</td>
-      <td>Test Strategy Gate</td>
-    </tr>
-  </tbody>
-</table>
+# Password-sikkerhed i et login-system
+
+Dette projekt demonstrerer forskellige software-testteknikker anvendt på et simpelt login-system. Fokus er på password-sikkerhed, herunder input-validering, grænseværdier, brute-force beskyttelse og CRUD-operationer.
+
+---
+
+## 1) Ækvivalensklasser
+
+Formål: Opdele input i gyldige og ugyldige grupper.
+
+### Eksempel – Brugernavn (3–20 tegn)
+
+| Klasse | Eksempel | Beskrivelse | Forventning |
+|--------|----------|-------------|-------------|
+| Gyldig | "abc" | Minimum gyldig længde | Accepteres |
+| Gyldig | "brugernavn123" | Normal længde | Accepteres |
+| Ugyldig | "ab" | For kort | Afvises |
+| Ugyldig | "" | Tom streng | Afvises |
+| Ugyldig | "a"*21 | For langt | Afvises |
+
+Testfil: test_aekvivalensklasser.py  
+Funktion: validate_username()
+
+---
+
+## 2) Grænseværdianalyse
+
+Formål: Teste værdier omkring en kritisk grænse.
+
+### Eksempel – Password længde (min. 8 tegn)
+
+| Test | Password | Forventning |
+|------|----------|-------------|
+| Lige under | "1234567" | Afvist |
+| Lige på | "12345678" | Gyldig |
+| Lige over | "123456789" | Gyldig |
+
+Testfil: test_graensevaerdi.py  
+Funktion: validate_password()
+
+---
+
+## 3) CRUD(L)
+
+CRUD bruges til at teste hele livscyklussen for en bruger.
+
+- Create: system.create_user("alice", "password123")
+- Read: system.users["alice"]
+- Update: system.users["alice"] = "nytpassword"
+- Delete: del system.users["alice"]
+
+Testfil: test_crud.py
+
+---
+
+## 4) Cycle Process Test
+
+Formål: Teste hele login-flowet inkl. brute-force beskyttelse.
+
+Scenarie:
+1. Opret bruger
+2. Login korrekt -> "ok"
+3. Login forkert 3 gange -> "forkert"
+4. Konto låses -> "låst"
+5. Selv korrekt password afvises efter låsning
+
+Testfil: test_cycle_process.py
+
+---
+
+## 5) Decision Table Test
+
+Formål: Teste alle kombinationer af login-regler.
+
+| Regel | Password korrekt | Konto låst | Resultat |
+|-------|------------------|------------|----------|
+| R1 | Ja | Nej | ok |
+| R2 | Nej | Nej | forkert |
+| R3 | Nej | Ja | låst |
+| R4 | Ja | Ja | låst |
+
+Testfil: test_decision_table.py
+
+---
+
+## 6) Testpyramiden
+
+Unit tests:
+- Validering af brugernavn
+- Validering af password
+- Login med korrekt password
+- Fejltæller
+
+Integration tests:
+- CRUD + login
+- Kontolåsning
+
+System tests:
+- Hele login-flowet
+
+Testfil: test_unit_example.py
+
+---
+
+## 7) Security Gates
+
+| Gate | Hvad testes |
+|------|-------------|
+| Code/Dev Gate | Unit tests for password, brugernavn, login |
+| Input Validation Gate | Ækvivalensklasser og grænseværdier |
+| Integration Security Gate | Cycle process (brute-force) |
+| System Security Gate | Decision table |
+| Release Gate | CRUD + login samlet |
+
+---
+
+## Testkørsel
+
+Kommando:
 
 ---
 

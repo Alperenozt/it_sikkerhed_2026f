@@ -124,7 +124,9 @@ Inden koden kan godkendes, skal den passere:
 
 ## 🚀 Kørsel af Tests
 
-Alle tests er verificeret d. 05-02-2026. Brug følgende kommando for at eksekvere test-suiten:
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/f1d7eaafd8c45e7f4faf150bae29917b03fc4ee9/test-k%C3%B8rsel-05-02-26.png)
+
+Alle tests er verificeret d. 05-02-2026. Brug følgende kommando for at eksekvere test: pytest -v eller -vv
 
 ```bash
 # Kør alle tests med detaljeret output

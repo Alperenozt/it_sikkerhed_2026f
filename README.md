@@ -194,7 +194,7 @@ Eksempler på tests med **Given → When → Then** struktur:
 
 ## Sikkerhed – GDPR og password-beskyttelse
 
-For at opfylde GDPR-krav (især artikel 5 og 32 om dataminimering, integritet og fortrolighed) samt generel god password-sikkerhed, er der implementeret **både hashing og kryptering af passwords**.
+For at opfylde GDPR-krav (især artikel 5 og 32 om dataminimering, integritet og fortrolighed) samt generel god password-sikkerhed, har jeg implementeret både hashing og kryptering af passwords.
 
 ### Valgte algoritmer
 
@@ -203,61 +203,52 @@ For at opfylde GDPR-krav (især artikel 5 og 32 om dataminimering, integritet og
 - **Valgt:** Argon2id  
 - **Alternativer:** bcrypt, scrypt, PBKDF2-SHA256  
 - **Begrundelse:**  
-  Argon2id vandt Password Hashing Competition 2015 og er i 2026 stadig OWASP, NIST og ENISA’s førstevalg. Memory-hard design gør brute-force og GPU/ASIC-angreb meget dyre.  
-  Parametre: `time_cost=2`, `memory_cost=102400`, `parallelism=8` giver god balance mellem sikkerhed og performance.
+  Argon2id vandt Password Hashing Competition 2015 og er i 2026 stadig OWASP, NIST og ENISA's førstevalg. Den er memory-hard, hvilket gør brute-force og GPU/ASIC-angreb meget dyre. Parametre: `time_cost=2`, `memory_cost=102400`, `parallelism=8` giver god balance mellem sikkerhed og performance på almindelige computere.
 
 #### Kryptering af følsomme data
 
 - **Valgt:** AES-256-GCM  
 - **Alternativer:** ChaCha20-Poly1305, AES-256-CBC (med HMAC)  
 - **Begrundelse:**  
-  NIST-godkendt, autentificeret kryptering (manipulation opdages), hardware-acceleration (AES-NI), hurtig og sikker. Bedre end CBC-mode som kræver ekstra MAC.
+  AES-256-GCM er NIST-godkendt, understøtter autentificeret kryptering (ingen ændring af ciphertext uden opdagelse), og har hardware-acceleration (AES-NI) på næsten alle moderne processorer. Den er hurtig og giver både fortrolighed og integritet – bedre end CBC-mode (som kræver ekstra MAC).
 
 ---
 
 ### Hvornår og hvorfor krypterer jeg data?
 
-- Ved oprettelse af bruger (`create_user`) og ved password-opdatering  
-- Hvad krypteres: Råpassword krypteres med AES-256-GCM + password-hash med Argon2id før lagring  
-- Hvorfor:  
-  - Hashing → umuligt at gendanne originalpassword ved datalæk (zero-knowledge)  
-  - AES → beskytter JSON-filen mod fysisk tyveri eller uautoriseret adgang  
-- Opfylder GDPR artikel 32: passende tekniske og organisatoriske foranstaltninger
+- Ved oprettelse af bruger (`create_user`) og ved password-opdatering.  
+- Hvad krypteres? Rå-password krypteres med AES-256-GCM (valgfrit ekstra lag) + password hashes med Argon2id før lagring.  
+- Hvorfor?  
+  - Hashing gør det umuligt at gendanne original-password ved datalæk (zero-knowledge).  
+  - AES-kryptering beskytter JSON-filen mod fysisk tyveri eller uautoriseret læsning (f.eks. på delt server eller stjålen laptop).  
+- Opfylder GDPR artikel 32 krav om "passende tekniske og organisatoriske foranstaltninger".
 
 ---
 
-### Dekryptering og hukommelseshåndtering
+### Dekryptering og fjernelse fra hukommelsen
 
-- **Password:** Aldrig dekrypteret ved login; hash-verifikation anvendes (`verify_password`)  
-- **Dekryptering af andre felter:** Kun når data skal bruges aktivt  
-- **Fjernelse af midlertidige data:** Straks efter brug med `del` + `gc.collect()`  
-- Hvorfor:  
-  - GDPR artikel 5(1)e → dataminimering, fjern data når det ikke er nødvendigt  
-  - Beskytter mod memory-scraping, cold-boot og malware
-
----
-
-### Andre hensyn
-
-- **Nøglehåndtering:** Master-nøgle til AES bør aldrig hardcodes; brug miljøvariabel eller secure vault  
-- **Key rotation:** Nøglen bør roteres periodisk; passwords re-krypteres ved rotation  
-- **Ingen logging:** Passwords og rådata logges aldrig  
-- **Backup-sikkerhed:** Krypter backup eller opbevar sikkert  
-- **Salt:** Håndteres automatisk af Argon2id  
-- **Side-channel beskyttelse:** Argon2id modstår timing- og cache-angreb
+- Hvornår og hvorfor dekrypteres data?  
+  - Aldrig for gemte passwords ved normal brug!  
+  - Ved login: Jeg dekrypterer ikke det gemte password. Jeg hasher det indtastede password og sammenligner med det gemte hash (`verify_password`).  
+- Hvorfor?  
+  - Dekryptering af passwords i hukommelse er et stort sikkerhedshul (memory scraping, debugging, cold-boot-angreb). Zero-knowledge-validering eliminerer behovet fuldstændigt.  
+- Hvornår og hvorfor fjerner jeg dekrypteret data fra hukommelsen?  
+  - Straks efter brug – efter `create_user` (når rå-password er hashed/krypteret) og efter `verify_password` (når indtastet password er tjekket).  
+- Hvordan?  
+  - `del` variabel + `gc.collect()`  
+- Hvorfor?  
+  - GDPR artikel 5(1)e kræver dataminimering – data må kun opbevares så længe det er nødvendigt. Dekrypteret data i RAM er sårbar over for hukommelses-dump-angreb (malware, cold-boot, law-enforcement tools). Ved at fjerne det med det samme minimeres risikoen.
 
 ---
 
-## Konklusion
+### Andre hensyn jeg har taget
 
-Denne flat-file JSON database er:
-
-- **Sikker:** AES-256-GCM + Argon2id  
-- **Let at forstå og bruge**  
-- **Egnet til små projekter og prototyper**  
-
-> Bemærk: Ikke egnet til højbelastede produktionsmiljøer med mange samtidige skrivninger eller avanceret adgangsstyring.
-
+- **Nøglehåndtering:** Master-nøglen til AES er ikke hard-coded i kode (demo-brug kun). I produktion skal den hentes fra miljøvariabel (`os.getenv`) eller en secure vault (f.eks. AWS Secrets Manager, HashiCorp Vault).  
+- **Key rotation:** Nøglen bør roteres periodisk – ved rotation skal alle passwords gen-krypteres/hashes.  
+- **Ingen logging:** Passwords eller rå-data logges aldrig.  
+- **Backup-sikkerhed:** JSON-backup skal krypteres eller opbevares sikkert.  
+- **Salt:** Håndteres automatisk af Argon2id (ingen manuel salt nødvendig).  
+- **Side-channel-beskyttelse:** Argon2id er designet til at modstå timing- og cache-angreb.
 
 
 ---

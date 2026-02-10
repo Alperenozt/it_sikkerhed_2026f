@@ -145,9 +145,119 @@ Tabellen herunder viser, hvordan systemet skal reagere på forskellige kombinati
 **Testfil:** `test_login_datadreven.py`  
 **Teknik:** Parametrisering sikrer, at vi tester alle logiske kombinationer (Edge Cases) i en samlet funktion.
 
-```bash
-# Kør alle tests med detaljeret output
-pytest -v test_aekvivalensklasser.py test_graensevaerdi.py test_crud.py test_cycle_process.py test_decision_table.py
+# Flat File JSON Brugerdatabase
+**Dato:** 10. februar 2026
+
+Dette projekt implementerer en **simpel brugerdatabase**, der gemmer alle data i én JSON-fil uden brug af en traditionel relationsdatabase.
+
+---
+
+## Hvorfor er det smart at bruge en flat-file database (JSON-fil)?
+
+- **Ingen installation eller opsætning** – ingen database-server, ingen Docker-container, ingen cloud-tjeneste  
+- **Kun Python standardbibliotek** – kræver ingen eksterne pakker (udover pycryptodome og argon2-cffi)  
+- **Meget nem at forstå og debugge** – åbn filen `db_flat_file.json` i enhver teksteditor og se alle data med det samme  
+- **Perfekt til små projekter, prototyper, undervisning og PoC** – typisk < 1.000 brugere og lav skrivefrekvens  
+- **100 % portabel** – kopier bare JSON-filen til en anden maskine → databasen følger med  
+- **Ingen runtime-afhængigheder** – ingen process kører i baggrunden, ingen port-konflikter  
+- **Menneskelæselig backup og versionering** – nem at tage backup af, nem at se ændringer i git  
+
+### Begrænsninger
+
+- Ikke egnet til mange samtidige skrivninger  
+- Ingen transaktioner / ACID-garanti  
+- Ingen indeksering → langsom ved meget store datasæt  
+- Ingen rettighedsstyring / brugeradgangskontrol  
+
+> Flat-file JSON er smart til læringsformål, små applikationer og hurtige prototyper – men ikke til produktion med høj belastning.
+
+---
+
+## Unit tests – bevis for at databasen virker
+
+Projektet indeholder omfattende unit tests med `pytest`.  
+Alle vigtige funktioner testes: oprettelse, læsning, kryptering, dekryptering, password-verifikation, aktivering/deaktivering og persistens.  
+De tests, der fejler, er bevidst sat til at demonstrere assert-fejl, exceptions og edge-cases.
+
+---
+
+## Udvalgte tests med risici-kommentarer
+
+Eksempler på tests med **Given → When → Then** struktur:
+
+- Opret bruger → Antal brugere stiger → Risiko: manglende oprettelse  
+- Kryptering/dekryptering → Data er ikke i klartekst → Risiko: læk af følsom info  
+- Verify password → korrekt password godkendes → Risiko: forkert håndtering tillader login  
+- Aktivering/deaktivering → korrekt ændring af flag → Risiko: sikkerhedsbrud eller uautoriseret adgang  
+
+---
+
+## Sikkerhed – GDPR og password-beskyttelse
+
+For at opfylde GDPR-krav (især artikel 5 og 32 om dataminimering, integritet og fortrolighed) samt generel god password-sikkerhed, er der implementeret **både hashing og kryptering af passwords**.
+
+### Valgte algoritmer
+
+#### Hashing af passwords
+
+- **Valgt:** Argon2id  
+- **Alternativer:** bcrypt, scrypt, PBKDF2-SHA256  
+- **Begrundelse:**  
+  Argon2id vandt Password Hashing Competition 2015 og er i 2026 stadig OWASP, NIST og ENISA’s førstevalg. Memory-hard design gør brute-force og GPU/ASIC-angreb meget dyre.  
+  Parametre: `time_cost=2`, `memory_cost=102400`, `parallelism=8` giver god balance mellem sikkerhed og performance.
+
+#### Kryptering af følsomme data
+
+- **Valgt:** AES-256-GCM  
+- **Alternativer:** ChaCha20-Poly1305, AES-256-CBC (med HMAC)  
+- **Begrundelse:**  
+  NIST-godkendt, autentificeret kryptering (manipulation opdages), hardware-acceleration (AES-NI), hurtig og sikker. Bedre end CBC-mode som kræver ekstra MAC.
+
+---
+
+### Hvornår og hvorfor krypterer jeg data?
+
+- Ved oprettelse af bruger (`create_user`) og ved password-opdatering  
+- Hvad krypteres: Råpassword krypteres med AES-256-GCM + password-hash med Argon2id før lagring  
+- Hvorfor:  
+  - Hashing → umuligt at gendanne originalpassword ved datalæk (zero-knowledge)  
+  - AES → beskytter JSON-filen mod fysisk tyveri eller uautoriseret adgang  
+- Opfylder GDPR artikel 32: passende tekniske og organisatoriske foranstaltninger
+
+---
+
+### Dekryptering og hukommelseshåndtering
+
+- **Password:** Aldrig dekrypteret ved login; hash-verifikation anvendes (`verify_password`)  
+- **Dekryptering af andre felter:** Kun når data skal bruges aktivt  
+- **Fjernelse af midlertidige data:** Straks efter brug med `del` + `gc.collect()`  
+- Hvorfor:  
+  - GDPR artikel 5(1)e → dataminimering, fjern data når det ikke er nødvendigt  
+  - Beskytter mod memory-scraping, cold-boot og malware
+
+---
+
+### Andre hensyn
+
+- **Nøglehåndtering:** Master-nøgle til AES bør aldrig hardcodes; brug miljøvariabel eller secure vault  
+- **Key rotation:** Nøglen bør roteres periodisk; passwords re-krypteres ved rotation  
+- **Ingen logging:** Passwords og rådata logges aldrig  
+- **Backup-sikkerhed:** Krypter backup eller opbevar sikkert  
+- **Salt:** Håndteres automatisk af Argon2id  
+- **Side-channel beskyttelse:** Argon2id modstår timing- og cache-angreb
+
+---
+
+## Konklusion
+
+Denne flat-file JSON database er:
+
+- **Sikker:** AES-256-GCM + Argon2id  
+- **Let at forstå og bruge**  
+- **Egnet til små projekter og prototyper**  
+
+> Bemærk: Ikke egnet til højbelastede produktionsmiljøer med mange samtidige skrivninger eller avanceret adgangsstyring.
+
 
 
 ---

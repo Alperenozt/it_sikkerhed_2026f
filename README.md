@@ -186,6 +186,15 @@ Velegnet til læring, PoC og små applikationer – ikke til højbelastet produk
 # 🧪 Unit Tests – Dokumentation for funktionalitet
 Nedenfor er et screenshot af kørte unit tests (pytest -v -s).
 
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/ea0530c5946b9b636a794868a6161e715fb28fc8/10-02-26%20unit%20test%20af%20db.png) 
+
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/f931edd24c334fb20194c74d4ca4e518adab348a/10-02-26%20unit%20test%20af%20dbpart2.png)
+
+Udvalgte tests med risici-kommentarer
+Her er nogle af de tests med Given → When → Then-struktur og en kort risikovurdering:
+
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/f931edd24c334fb20194c74d4ca4e518adab348a/udvalgte%20test%20med%20given%2C%20when%2C%20then.png)
+
 
 ## Sikkerhed – GDPR og password-beskyttelse
 
@@ -319,7 +328,9 @@ Ingen manuel implementering er nødvendig.
 ## ⏱ Side-channel-beskyttelse
 Argon2id er designet til at reducere risikoen for timing- og cache-baserede angreb.
 
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/f931edd24c334fb20194c74d4ca4e518adab348a/screenafdbmedkryptering.png)
 
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/f931edd24c334fb20194c74d4ca4e518adab348a/test10-10-26.png) 
 
 
 

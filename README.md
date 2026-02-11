@@ -184,37 +184,107 @@ Velegnet til læring, PoC og små applikationer – ikke til højbelastet produk
 ---
 
 # 🧪 Unit Tests – Dokumentation for funktionalitet
+Nedenfor er et screenshot af kørte unit tests (pytest -v -s).
 
 
+## Sikkerhed – GDPR og password-beskyttelse
 
-# 🔐 Sikkerhed – GDPR & Password-beskyttelse
+For at efterleve GDPR (særligt artikel 5 og 32 om dataminimering, integritet og fortrolighed) samt moderne principper for sikker password-håndtering, er der implementeret både kryptografisk hashing og symmetrisk kryptering.
 
-For at leve op til GDPR (særligt artikel 5 og 32 om dataminimering, integritet og fortrolighed) samt moderne sikkerhedsstandarder for password-håndtering, anvender systemet både **kryptografisk hashing** og **symmetrisk kryptering**.
+Formålet er at sikre:
 
-Målet er:
-
-- At forhindre gendannelse af passwords ved datalæk  
-- At beskytte data mod fysisk kompromittering  
-- At minimere eksponering i hukommelsen  
-- At implementere “defense in depth”  
+- At passwords aldrig kan genskabes ved datalæk  
+- At lagrede data er beskyttet mod uautoriseret adgang  
+- At eksponering i hukommelsen minimeres  
+- At løsningen følger “defense-in-depth”-princippet  
 
 ---
 
-## 🔑 Valgte algoritmer
+### Valgte algoritmer
 
-### 1️⃣ Password Hashing
+#### Hashing af passwords
 
-**Primær algoritme:** `Argon2id`  
-**Overvejede alternativer:** bcrypt, scrypt, PBKDF2-SHA256  
+**Valgt:** Argon2id  
+**Alternativer:** bcrypt, scrypt, PBKDF2-SHA256  
 
-### Hvorfor Argon2id?
+**Begrundelse:**  
+Argon2id vandt Password Hashing Competition og er fortsat (2026) anbefalet af OWASP, NIST og ENISA. Algoritmen er memory-hard, hvilket betyder, at brute-force-angreb – især via GPU eller specialhardware (ASIC) – bliver markant dyrere og langsommere.
 
-- Vinder af Password Hashing Competition  
-- Anbefalet af OWASP, NIST og ENISA (stadig standard i 2026)  
-- Memory-hard → gør GPU/ASIC brute-force ekstremt dyrt  
-- Designet til at modstå timing- og cache-angreb  
+Anvendte parametre:
 
-**Konfiguration:**
+- `time_cost = 2`  
+- `memory_cost = 102400`  
+- `parallelism = 8`  
+
+Disse værdier giver en solid balance mellem høj sikkerhed og acceptabel performance på almindelige systemer.
+
+---
+
+#### Kryptering af følsomme data
+
+**Valgt:** AES-256-GCM  
+**Alternativer:** ChaCha20-Poly1305, AES-256-CBC (med HMAC)
+
+**Begrundelse:**  
+AES-256-GCM er NIST-godkendt og understøtter autentificeret kryptering (AEAD), hvilket betyder, at både fortrolighed og integritet sikres. Eventuelle ændringer i ciphertext opdages automatisk.  
+
+Derudover understøttes hardware-acceleration (AES-NI) på næsten alle moderne CPU’er, hvilket giver høj ydeevne uden at gå på kompromis med sikkerheden.  
+
+GCM-mode er generelt sikrere og mere moderne end CBC-mode, som kræver en separat MAC for at opnå samme beskyttelsesniveau.
+
+---
+
+### Hvornår og hvorfor krypterer jeg data?
+
+Kryptering og hashing udføres ved:
+
+- Oprettelse af bruger (`create_user`)  
+- Opdatering af password  
+
+**Hvad krypteres?**  
+Det rå password krypteres med AES-256-GCM (som et ekstra beskyttelseslag) og hashes derefter med Argon2id, før det lagres.
+
+**Hvorfor?**
+
+- Hashing sikrer, at original-password ikke kan rekonstrueres ved datalæk (zero-knowledge-princip).
+- AES-kryptering beskytter selve JSON-filen mod fysisk kompromittering (f.eks. stjålet laptop eller uautoriseret adgang på delt server).
+- Understøtter GDPR artikel 32 om passende tekniske og organisatoriske sikkerhedsforanstaltninger.
+
+---
+
+### Hvornår og hvorfor dekrypterer jeg data?
+
+Aldrig for gemte passwords ved normal brug.
+
+Ved login dekrypteres det gemte password ikke.  
+I stedet hashes det indtastede password og sammenlignes med det lagrede hash via `verify_password`.
+
+**Hvorfor?**
+
+Dekryptering af passwords i hukommelsen øger risikoen for:
+
+- Memory scraping  
+- Debugging-angreb  
+- Cold-boot-angreb  
+- RAM-dump analyse  
+
+Ved at anvende zero-knowledge-validering elimineres behovet for dekryptering fuldstændigt.
+
+---
+
+### Hvornår og hvorfor fjerner jeg dekrypteret data fra hukommelsen?
+
+Straks efter brug:
+
+- Efter `create_user` (når password er hashed og krypteret)  
+- Efter `verify_password` (når login-validering er gennemført)
+
+**Hvordan?**
+
+```python
+del password
+gc.collect()
+
 
 
 

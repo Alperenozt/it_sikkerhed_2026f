@@ -279,11 +279,31 @@ Straks efter brug:
 - Efter `create_user` (når password er hashed og krypteret)  
 - Efter `verify_password` (når login-validering er gennemført)
 
-**Hvordan?**
+Hvordan? del variabel + gc.collect()
 
-```python
-del password
-gc.collect()
+Hvorfor?
+GDPR artikel 5(1)e kræver dataminimering – data må kun opbevares så længe det er nødvendigt. Dekrypteret data i RAM er sårbar over for hukommelses-dump-angreb (malware, cold-boot, law-enforcement tools). Ved at fjerne det med det samme minimeres risikoen.
+
+Andre hensyn jeg har taget
+
+Nøglehåndtering:
+AES-master-nøglen er ikke hard-coded (kun i demo-sammenhæng). I produktion skal den hentes fra miljøvariabler (os.getenv) eller en sikker nøglehåndteringstjeneste som f.eks. AWS Secrets Manager eller HashiCorp Vault.
+
+Key rotation:
+Kryptografiske nøgler bør roteres periodisk. Ved rotation skal eksisterende data gen-krypteres og hashes på ny.
+
+Ingen logging:
+Passwords eller rå følsomme data logges aldrig.
+
+Backup-sikkerhed:
+Backup af JSON-filen skal enten krypteres eller opbevares i et sikkert miljø.
+
+Salt:
+Salt håndteres automatisk af Argon2id – ingen manuel implementering er nødvendig.
+
+Side-channel-beskyttelse:
+Argon2id er designet til at reducere risikoen for timing- og cache-baserede angreb.
+
 
 
 

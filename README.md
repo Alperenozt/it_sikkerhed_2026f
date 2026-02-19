@@ -332,7 +332,22 @@ Argon2id er designet til at reducere risikoen for timing- og cache-baserede angr
 
 ![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/f931edd24c334fb20194c74d4ca4e518adab348a/test10-10-26.png) 
 
+# OPGAVE – 1 REST API
+**Dato:** 19-02-26
 
+### 🛠 Beskrivelse
+Udvikling af et REST API i **Python + Fast API**.
+
+---
+
+### 🚦 Test
+Alle funktioner kan testes via: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+* **Create**: Oprette data - (via flat_file eller [repo](https://bitbucket.org/BartlomiejRohardWarszawski/it_sikkerhed/src/main/)
+* **Read**: Læse data
+* **Update**: Opdatere data
+* **Delete**: Slette data (Evt.)
+* **List**: Liste overordnet data (Evt.)
 
 ---
 

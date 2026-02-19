@@ -349,6 +349,26 @@ Alle funktioner kan testes via: [http://127.0.0.1:8000/docs](http://127.0.0.1:80
 * **Delete**: Slette data (Evt.)
 * **List**: Liste overordnet data (Evt.)
 
+# OPGAVE – 2 AUTH
+**Dato:** 19-02-26
+
+### 🔐 Beskrivelse
+Udvikling af et **Authorization REST API**, der kan udstede security tokens.
+
+---
+
+### 🚦 Test
+Alle funktioner testes via: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+* **Admin Bruger**: Oprettelse af standard admin (hvis ingen `user_db`).
+* **Security Token**: Hent token via admin bruger.
+* **Password**: Ændre password på admin.
+* **Accounts**: Registrere nye konti.
+* **Deaktivering**: Deaktivere egen konto.
+* **Reaktivering**: Genaktivere konto via admin.
+* **Sikkerhed**: Kun `test-secrets` ligger i Git; `prod-secrets` ligger i environment variables.
+
+
 ---
 
 ### 💻 Terminal & Status

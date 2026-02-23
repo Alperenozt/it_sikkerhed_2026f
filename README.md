@@ -344,6 +344,9 @@ Udvikling af et REST API i **Python + Fast API**.
 Alle funktioner kan testes via: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
 * **Create**: Oprette data - (via flat_file eller [repo](https://bitbucket.org/BartlomiejRohardWarszawski/it_sikkerhed/src/main/)
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/afae4345d66a5d037385ac0346e20759a3ba3984/user1.png) 
+
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/afae4345d66a5d037385ac0346e20759a3ba3984/user2del.png)
 * **Read**: Læse data
 * **Update**: Opdatere data
 * **Delete**: Slette data (Evt.)

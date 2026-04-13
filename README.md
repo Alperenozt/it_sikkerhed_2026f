@@ -403,38 +403,23 @@ Alle funktioner testes via: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/d
 ![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/reactiverdel1.png)
 
 
-Sikkerhed og secrets
-Test-secrets til kryptering og hashing ligger i .env og kan versioneres i Git.
-Produktions-secrets skal ligge som environment variables.
+### 🛡️ Sikkerhed og secrets
+
+Test-secrets til kryptering og hashing ligger i `.env` og kan versioneres i Git.  
+Produktions-secrets skal ligge som **environment variables**.
 ![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/testsikkerhedienv.png)
+---
+### 👤 Brugerhåndtering
 
-
-
+#### **Delete User**
+#### **Get User**
 ---
 
-### 💻 Terminal & Status
+### 🌐 Test via browser
 
-```text
-      /\_/\      .-----------------------.
-     ( o.o )     |  Coding in progress.. |
-      > ^ <      '-----------------------'
+**Kør serveren:**
+```bash
+uvicorn src.auth_eksempel.main:app --reload
 
-          ________________________________________________
-         /                                                \
-         |  >_ System.out.println("Hello, Zealand!");      |
-         |  >_ Loading learning modules...                 |
-         |  [==================================>] 100%     |
-         \________________________________________________/
-                ||                           ||
-                ||      ________________     ||
-                ||     |                |    ||
-                ||     |      AL0001    |    ||
-                ||     |________________|    ||
-                ||                           ||
-         _______||___________________________||_______
-        /                                             \
-       /        ZEALAND ERHVERVSAKADEMI - 2026         \
-      /_________________________________________________\
-UNIT TEST - LEG OPGAVE
 
 

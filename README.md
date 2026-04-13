@@ -368,24 +368,46 @@ Alle funktioner kan testes via: [http://127.0.0.1:8000/docs](http://127.0.0.1:80
 ![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/gelalluserfromdbdel1.png)
 
 
-# OPGAVE – 2 AUTH
+# OPGAVE – 2 AUTH - Authorization REST API 🔐
 **Dato:** 19-02-26
 
 ### 🔐 Beskrivelse
-Udvikling af et **Authorization REST API**, der kan udstede security tokens.
+Udvikling af et **Authorization REST API**, der kan udstede security tokens: Dette modul implementerer et fuldt funktionelt REST API til **brugeradministration og authorization** ved brug af JWT-baserede security tokens. API'et er bygget med **FastAPI** og benytter en **flat-file JSON-database** til datapersistens.
+
 
 ---
 
 ### 🚦 Test
-Alle funktioner testes via: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+Alle funktioner testes via: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) : API'et kan tilgås og testes interaktivt via Swagger UI.
 
-* **Admin Bruger**: Oprettelse af standard admin (hvis ingen `user_db`).
-* **Security Token**: Hent token via admin bruger.
-* **Password**: Ændre password på admin.
-* **Accounts**: Registrere nye konti.
-* **Deaktivering**: Deaktivere egen konto.
-* **Reaktivering**: Genaktivere konto via admin.
-* **Sikkerhed**: Kun `test-secrets` ligger i Git; `prod-secrets` ligger i environment variables.
+
+* 1. **Admin Bruger**: Oprettelse af standard admin (hvis ingen `user_db`).
+* **Formål:** Brug denne konto til initialt login og verificering af token-funktionalitet.
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/adminoprettelsedel1.png)
+
+| **2. Opret bruger** | `POST /register_user` | Registrerer en ny bruger med `username`, `password`, `navn` og `roles`. |
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/registeruserdel1.png)
+
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/registeruserdel2.png)
+
+| ** 3. Hent security Token** | `POST /get_bearer_token` | Login med credentials for at modtage et **JWT-token**. |
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/getsecuritytokendel1.png)
+
+| ** 4. Skift Kodeord** | `POST /change_password` | Opdaterer password. Kræver gyldigt token i headeren. |
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/getstokendel2.png)
+
+| ** 5. Deaktivér en bruger** | `POST /deactivate_user` | En bruger kan deaktivere sin egen konto. Kræver token. |
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/deaktiverusermedtokendel1.png)
+
+| ** 6. Reaktivér en bruger** | `POST /activate_user` | **Kun Admin:** Genåbner en konto. Kræver admin-token. |
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/reactiverdel1.png)
+
+
+Sikkerhed og secrets
+Test-secrets til kryptering og hashing ligger i .env og kan versioneres i Git.
+Produktions-secrets skal ligge som environment variables.
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/testsikkerhedienv.png)
+
 
 
 ---

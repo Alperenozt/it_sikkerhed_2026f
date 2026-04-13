@@ -414,12 +414,77 @@ Produktions-secrets skal ligge som **environment variables**.
 #### **Delete User**
 #### **Get User**
 ---
-
 ### 🌐 Test via browser
 
-**Kør serveren:**
-```bash
-uvicorn src.auth_eksempel.main:app --reload
+For at starte Auth-servicen lokalt, skal du køre følgende kommando i din terminal: uvicorn src.auth_eksempel.main:app --reload
+
+
+# IT-Sikkerhed 2026f – Microservices med Autentifikation og Autorisering 🛡️
+
+Dette projekt demonstrerer en simpel **microservices-arkitektur** med fokus på sikker autentifikation og autorisering ved hjælp af JWT-tokens (Bearer).
+
+---
+
+### 🏗️ Projektets Opbygning
+Projektet er opdelt i to uafhængige services:
+
+* **Auth Server (Port 8000)**
+    Central service til brugermanagement: Registrering, login, token-udstedelse, validering af tokens, deactivate/activate brugere, password-ændring og sletning.
+  ![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/46428291bd1b31a27227848344760094f4f8e247/opgave2auth.png)
+
+* **Order Service (Port 8001) – *Den nye microservice***
+    Separat service, der **kun** tillader adgang, hvis Auth Server validerer tokenet. Her kan brugere oprette ordrer (via produkt query-parameter) og hente deres egne ordrer.
+
+---
+
+### 🔒 Arkitektur og sikkerhed
+
+* **Auth Server:** Udsteder JWT-tokens og tilbyder et `/validate_token`-endpoint (returnerer username og roles ved gyldigt token).
+* **Order Service:** Kontakter Auth Server ved hvert request (via `requests.get` til `/validate_token`).
+* **Validering:** Hvis token mangler, er ugyldigt eller ikke starter med "Bearer " ➔ returneres **401 Unauthorized**.
+* **Data:** Ordrer gemmes i hukommelse (dictionary: username ➔ liste af produkter).
+* **Rolle-tjek:** Ingen yderligere rolle-tjek i denne version (kun autentifikation).
+
+**Teknologi-stack:**
+* **FastAPI** (Begge services)
+* **PyJWT** (Token-generering/validering)
+* **cryptography** + **python-dotenv** (Kryptering af persondata og secrets)
+* **requests** (Service-to-service kald)
+
+---
+
+### 📦 Order Service – Den nye microservice
+
+#### **Endpoints:**
+* `POST /orders?product=<produkt>` ➔ Opret ordre (**kræver gyldigt Bearer-token**)
+* `GET /orders` ➔ Hent alle brugerens ordrer (**kun egne, kræver gyldigt token**)
+
+#### **Sikkerhedsmekanisme:**
+1.  Modtager token via header.
+2.  Videresender til Auth Server for validering.
+3.  Kun succesfuld validering ➔ adgang til endpoint.
+4.  Ved fejl ➔ **401 Unauthorized**.
+
+---
+
+### 📑 Dokumentation & Test Resultater
+
+#### **OPRET ORDER**
+*![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/46428291bd1b31a27227848344760094f4f8e247/opg2opretorder.png)
+
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/46428291bd1b31a27227848344760094f4f8e247/opg2getorderdel2.png)*
+
+#### **GET ORDER**
+*![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/46428291bd1b31a27227848344760094f4f8e247/opg2getorder.png)
+
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/46428291bd1b31a27227848344760094f4f8e247/opg2getorderdel2.png)*
+
+---
+*IT-Sikkerhed 2026f*
+
+
+
+
 
 
 

@@ -347,10 +347,26 @@ Alle funktioner kan testes via: [http://127.0.0.1:8000/docs](http://127.0.0.1:80
 ![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/afae4345d66a5d037385ac0346e20759a3ba3984/user1.png) 
 
 ![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/afae4345d66a5d037385ac0346e20759a3ba3984/user2del.png)
+
 * **Read**: Læse data
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/getdel1.png)
+
 * **Update**: Opdatere data
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/putdel1.png)
+
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/putdel2.png)
+  
 * **Delete**: Slette data (Evt.)
-* **List**: Liste overordnet data (Evt.)
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/deletedel1.png)
+
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/deletedel2.png)
+  
+### Liste over brugere (List)
+* **Endpoint:** `GET /users`
+* **Beskrivelse:** Returnerer en samlet oversigt over samtlige brugere, der er registreret i databasen.
+* **Funktion:** Giver et hurtigt overblik over systemets data i et læsbart JSON-format.
+![alt image](https://github.com/Alperenozt/it_sikkerhed_2026f/blob/788a3d33ad6600e8f1f3d7b5773e19f04c638e2f/gelalluserfromdbdel1.png)
+
 
 # OPGAVE – 2 AUTH
 **Dato:** 19-02-26

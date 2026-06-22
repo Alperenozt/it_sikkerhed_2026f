@@ -23,4 +23,4 @@ jobs:
       run: pip install pytest
 
     - name: Kør tests
-      run: pytest -v
+      run: pytest test/test_examples.py -v

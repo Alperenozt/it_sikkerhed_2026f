@@ -4,7 +4,7 @@ def test_pass():
     assert True
 
 def test_fail():
-    assert "Python" == "Python"
+    assert "Python" == "Mælk"
 
 def test_skip():
     pytest.skip("Denne test springes over med vilje")

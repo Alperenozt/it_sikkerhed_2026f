@@ -2,9 +2,9 @@ name: Kør pytest automatisk
 
 on:
   push:
-    branches: [ "fix-test" ]
+    branches: [ "fix-tests" ]
   pull_request:
-    branches: [ "fix-test" ]
+    branches: [ "fix-tests" ]
 
 jobs:
   test:

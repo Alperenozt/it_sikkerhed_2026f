@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "person_id": 1,
+      "first_name": "alperen",
+      "last_name": "ozturk",
+      "address": "næstvedvej ",
+      "street_number": 20,
+      "password": "Hejmeddig123",
+      "enabled": true
+    },
+    {
+      "person_id": 2,
+      "first_name": "Peter",
+      "last_name": "Peter",
+      "address": "Næstvedvej",
+      "street_number": 2,
+      "password": "Peter123",
+      "enabled": true
+    }
+  ]
+}

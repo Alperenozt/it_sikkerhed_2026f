@@ -22,5 +22,5 @@ jobs:
     - name: Installer afhængigheder
       run: pip install pytest
 
-    - name: Kør KUN test_examples.py
+    - name: Kør security gate tests
       run: pytest -v -c /dev/null test/test_examples.py

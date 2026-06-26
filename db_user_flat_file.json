@@ -78,5 +78,15 @@
     "roles": [
       "admin"
     ]
+  },
+  "admin@zea.dk": {
+    "username": "admin@zea.dk",
+    "password": "cXDTDf5SQJp6UQedXZXOTtu3ZPvsXJPx5Qoe0nIpaWEZ+S2JZFEhuvAqJa4bdrB8",
+    "first_name": "gAAAAABqOk9dOX-HCMD6fGiyojbYwWQK8Ul1Sx41ohRQ-h-snFYV3pW3o9aazXiVofEAP7HXSTzHnkU2Zzbj34O6gmS5hexP_g==",
+    "last_name": "gAAAAABqOk9dqjf1TrpHt4rq7Nso_YkrMBabQp1zI99qziCTsiKFGvfzcX2hrcx6CIWb4k8uVRc_Qt9LD8zz2cWzHxyBI_otbQ==",
+    "active": true,
+    "roles": [
+      "admin"
+    ]
   }
 }

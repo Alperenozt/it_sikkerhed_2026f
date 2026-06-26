@@ -1,7 +1,7 @@
 import pytest
 from src.test_strategier.login_system import LoginSystem
 
-@pytest.mark.focus
+
 @pytest.mark.parametrize("korrekt_kode, laast, forventet", [
     (True, False, "ok"),
     (False, False, "forkert"),

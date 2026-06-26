@@ -1,4 +1,5 @@
 import pytest
+@pytest.mark.focus
 
 def test_pass():
     assert True

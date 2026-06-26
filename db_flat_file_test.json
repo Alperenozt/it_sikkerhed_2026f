@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "person_id": 0,
+      "first_name": "4Z03Qd5nXOi3GP3166tQu8pAeqE3ONGN15bSTqvlTi7g",
+      "last_name": "CeEpYxGXlgDqg+01ckmdNf1E6jmmXIN+RlPfjKM9xFHED4zW",
+      "address": "fIxMpZT1NUcMHvoZhqPuLlmZ+XJv3Qn/Vs+RVekXsWTiQwBuAENZ",
+      "street_number": "qbrf6V6C2/clhOfZBGhO7QDkAjUCDp7baP7DxDgq",
+      "password": "$argon2id$v=19$m=102400,t=2,p=8$IqIbZQ+zvRnQD0P/AUl0Fw$vMC5IAJqIHKHPQqIFsc+Cqsqtusu5oyhfKtyZ5GdozY",
+      "enabled": true
+    }
+  ]
+}

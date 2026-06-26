@@ -1,0 +1,92 @@
+{
+  "admin": {
+    "username": "admin",
+    "password": "bsS/acIHK7f1rMDNsrxERWMW97TEm6ye++aLezW5upHs38VrLVmoe2cxchwL3E4K",
+    "first_name": "gAAAAABplvNa2lmJyNu7AHtB-Uc-3NNtpR5T84UFdyDQIXAV8ysYW3ZbazpUb6hlTgc9f1qV26yo3OcTUH96vXLajhlhOGZPPif6_EBdE1OwafgnKhe0x-8=",
+    "last_name": "gAAAAABplvNa7Vq7guRgVbBwRsd0jm75Z1oRSzwaMmoaxPFXc-QUlIAnX7tIKOVTOFIX9ZDEXHX6FPyBxNH0TIKLS4fLBCW6rA==",
+    "active": true,
+    "roles": [
+      "admin"
+    ]
+  },
+  "hej@zealand.dk": {
+    "username": "hej@zealand.dk",
+    "password": "70l8lm5IFCqYsIkUKGpl74zia6CQSuMEFE6Fq4H/W8RSTEEQ5WurbhyBirury8WD",
+    "first_name": "gAAAAABpoA60Keq32WCKHfEPyfWb-yrjKo8aMZRdy-oGF4vwFvNMWTCuQz_AKqpsKkB-B_p17fPIz4JVV0I8N67X5Kn5e_obIg==",
+    "last_name": "gAAAAABpoA60DfHSHAi4se_M7GqAoIa8-xyn_3M3PvCiRfUx1nFHqMHNbog7IbmhiYZJbyTB4BIGFDuYBEO-YyFHpBpF6BOQeg==",
+    "active": true,
+    "roles": [
+      "user"
+    ]
+  },
+  "testuser@zealand.dk": {
+    "username": "testuser@zealand.dk",
+    "password": "xk6dcdjy9KyAey26mPydBZAeNlvInt1qHfIoEJsXEvQ5sse1FgdgqdcDwpsbniNQ",
+    "first_name": "gAAAAABpoBqB6_wp36yT2GoNYr5rIQi1Upbz_k9fzo81SBsYMsftd6sHBrSqu9GPv8yzdRMygmVI9lSfk2azibxSb8s11ncG6A==",
+    "last_name": "gAAAAABpoBqBWzgRHEpcqn5K_dRnJQ-UgJrgATCOvrkIOJnklFBKPB9dWH9oUeFbEU-Yj05eDGblzGJss0ug9wHhbb1dI8XMDg==",
+    "active": true,
+    "roles": [
+      "user"
+    ]
+  },
+  "palle@zealand.dk": {
+    "username": "palle@zealand.dk",
+    "password": "8pfB8nxIV3g6U1D+UW6WksRGmZ/U+jKp91ocqgVGm5GtUa/waKgcCRmO48r13otQ",
+    "first_name": "gAAAAABpppXrdFCTyVxqr8D7KL-s-IMfKt7ma46bW4U8C3vYyZqYLWEUcpoZJO6Rl04zKZJa0ZqQfSlYeYEhrmuaBICcqFe1eA==",
+    "last_name": "gAAAAABpppXrkhtrkMLbZJsKrk-TGIrIAXpgdpLYh2e4J5lmDP5Or9MtXZ_kzC2nLxYxVLIlYq0tGna71_UnMet5vJMPJOhDJg==",
+    "active": true,
+    "roles": [
+      "user"
+    ]
+  },
+  "hej1@zealand.dk": {
+    "username": "hej1@zealand.dk",
+    "password": "dWG4MkKIETO7eyGnWio5Iail+9acHmUbNkmh6hMfCn2taMFCBtO5y99fFac4Ckqq",
+    "first_name": "gAAAAABpppkw24CEhHSnENUq3EpQltlQKHhoqsPGR4PQz5Xqjx0LCtnoBJwiW_ooJskvC7xNC8wNSuosq-AgZOnsQOXvYZxp3Q==",
+    "last_name": "gAAAAABpppkwTAFqZkB-K7ZFGncXOr3eX8bDZ31cPPKNfII6DUCt6hNwF7202MDsjWQH4XFok0gYgt2SvHRpdqj8birb6UnsCA==",
+    "active": true,
+    "roles": [
+      "user"
+    ]
+  },
+  "alo@zealand.dk": {
+    "username": "alo@zealand.dk",
+    "password": "RvNEzNEgvbz11FgzNB7nPpWExeuqDlzQ1wLULbpfuJAVvD72JGGBf2ZKmgVvYayO",
+    "first_name": "gAAAAABppp0BRje5X_ezHpmBGz4VTYi8dKjSwnOWZTI8qmeLAGlL0UGfU1brvKP0xecY17VgXVftAPB42pmvrOarngCsy-EDOQ==",
+    "last_name": "gAAAAABppp0BwaFqyOAmCOS0lOs7--Lx3FhvrnsNHSkuZ-BqHBIeJyrS5G8zsCr335Mtbh7fDaZVIrh8pVEA8t7XXzjnI1QqVA==",
+    "active": true,
+    "roles": [
+      "user"
+    ]
+  },
+  "alperen@zea.dk": {
+    "username": "alperen@zea.dk",
+    "password": "ZkC37Rbgl/W8zaTeyN61rpAYkgA28wG84II336PQJp2Dy9GfJbLMkTeRgQHpTRN3",
+    "first_name": "gAAAAABqNklOvzC2xA2G_oLlJ_mnRXVLYxNuSCC6Q1DISB7axyxXetlBVX-e_PJsm-FFmBIWOYNQSdAhQZeagXMZTy26DmTq-g==",
+    "last_name": "gAAAAABqNklOFVIJztXdwKJ76F7L6qUnSmTtrw0tifHQK9-vG3ZrX8Palbz4gkBnM_7MEyMkiXWqgRBPlzbUxGG11ZG9EHrmYQ==",
+    "active": true,
+    "roles": [
+      "user"
+    ]
+  },
+  "alperenoz@zea.dk": {
+    "username": "alperenoz@zea.dk",
+    "password": "aVxQgIYp7PxoTEMuRbytQjSPysu4IlU9XkSy/54xuGnhHoOM8lgbCjU/zgZ0g95/",
+    "first_name": "gAAAAABqNkn4YHfzFFTXPMySTypa9g18-tEENTiFNQXbfXXPDRIdLVsIDfjCLvk05yo3yQUj4KeUsR2EZpJsFg7cpHTsSIL-Nw==",
+    "last_name": "gAAAAABqNkn4V6PBdPoflPDydhEy6340FKWGRke2Ie6p42x1c0vOrUCeVkBOsMATfCzPB66eCwKqdt-Ztt0NIgDD8C51GFVpTA==",
+    "active": true,
+    "roles": [
+      "admin"
+    ]
+  },
+  "admin@zea.dk": {
+    "username": "admin@zea.dk",
+    "password": "cXDTDf5SQJp6UQedXZXOTtu3ZPvsXJPx5Qoe0nIpaWEZ+S2JZFEhuvAqJa4bdrB8",
+    "first_name": "gAAAAABqOk9dOX-HCMD6fGiyojbYwWQK8Ul1Sx41ohRQ-h-snFYV3pW3o9aazXiVofEAP7HXSTzHnkU2Zzbj34O6gmS5hexP_g==",
+    "last_name": "gAAAAABqOk9dqjf1TrpHt4rq7Nso_YkrMBabQp1zI99qziCTsiKFGvfzcX2hrcx6CIWb4k8uVRc_Qt9LD8zz2cWzHxyBI_otbQ==",
+    "active": true,
+    "roles": [
+      "admin"
+    ]
+  }
+}

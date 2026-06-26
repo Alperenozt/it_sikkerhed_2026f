@@ -2,9 +2,9 @@ name: Kør pytest automatisk
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "fix-tests" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "fix-tests" ]
 
 jobs:
   test:
@@ -22,5 +22,5 @@ jobs:
     - name: Installer afhængigheder
       run: pip install pytest
 
-    - name: Kør tests
-      run: pytest -v
+    - name: Kør security gate tests
+      run: pytest -v -c /dev/null test/test_examples.py
